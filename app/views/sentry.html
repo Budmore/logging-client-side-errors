@@ -1,0 +1,51 @@
+<div class="wrapper" ng-controller="SentryCtrl">
+	<div class="container">
+		<div class="alert alert-info alert-dismissable" ng-if="showAlert">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="hideAlert()">&times;</button>
+			<p>
+				Click some buttons and checkout logs at <a href="//sentry.budmore.pl" title="Sentry at budmore domain">http://sentry.budmore.pl</a> demo:demo
+			</p>
+		</div>
+		<div class="row mb40">
+
+			<div class="col-md-6 col-xs-12">
+				<section>
+					<div class="box-inner box-inner-mobile">
+						<h4>onclick()</h4>
+						<p>
+							Uncaught ReferenceError: modifyText is not defined
+						</p>
+						<button type="button" class="btn btn-danger" onclick="modifyText();">Create exception!</button>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-6 col-xs-12">
+				<section>
+					<div class="box-inner box-inner-mobile">
+						<h4>Show modal</h4>
+						<p>
+							Modal is undefined.
+						</p>
+						<button type="button" class="btn btn-danger" ng-click="showModal()">Create exception!</button>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+
+				<h4>Send feedback <small>as exception</small></h4>
+				<form class="form-horizontal" name="formFeedback" role="form" ng-submit="sendFeedback(message)">
+					<div class="form-group">
+						<div class="col-md-12">
+							<textarea class="form-control" rows="3" ng-model="message" required></textarea>
+						</div>
+					</div>
+					<button class="btn btn-primary" ng-disabled="!formFeedback.$valid">Send feedback!</button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

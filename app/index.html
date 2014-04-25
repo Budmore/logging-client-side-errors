@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Logging client side errors</title>
+	<meta name="description" content="Logging client side errors - demo page">
+	<meta name="viewport" content="width=device-width">
+
+	<!-- build:css styles/vendor.css -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
+	<!-- endbuild -->
+
+	<!-- build:css({.tmp,app}) styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- endbuild -->
+</head>
+<body ng-app="errorLabs" ng-controller="SentryCtrl">
+	<header>
+		<div class="container">
+			<div class="page-header">
+				<h1>
+					Logging client side errors <small>{{ clientName }}</small>
+				</h1>
+		</div>
+	</header>
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="alert alert-info alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<p>
+					Click some buttons and checkout logs at <a href="//sentry.budmore.pl" title="Sentry at budmore domain">http://sentry.budmore.pl</a> demo:demo
+				</p>
+			</div>
+			<div class="row mb40">
+
+				<div class="col-md-6 col-xs-12">
+					<section>
+						<div class="box-inner box-inner-mobile">
+							<h4>getList()</h4>
+							<p>
+								Promise error handling
+							</p>
+							<button type="button" class="btn btn-danger" ng-click="getList();">Create exception!</button>
+						</div>
+					</section>
+				</div>
+				<div class="col-md-6 col-xs-12">
+					<section>
+						<div class="box-inner box-inner-mobile">
+							<h4>Show modal</h4>
+							<p>
+								Undefined object.
+							</p>
+							<button type="button" class="btn btn-danger" ng-click="showModal()">Create exception!</button>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+
+					<h4>Send feedback <small>as exception</small></h4>
+					<form class="form-horizontal" name="formFeedback" role="form" ng-submit="sendFeedback(message)">
+						<div class="form-group">
+							<div class="col-md-12">
+								<textarea class="form-control" rows="3" ng-model="message" required></textarea>
+							</div>
+						</div>
+						<button class="btn btn-primary" ng-disabled="!formFeedback.$valid">Send feedback!</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="sticky-footer">
+		<div class="container">
+			<div class="grey-links text-center">
+				<a href="https://github.com/Budmore/logging-client-side-errors" title="Budmore github"><i class="fa fa-github-alt"></i></a>
+				<a href="https://twitter.com/Budmore" title="Budmore twitter"><i class="fa fa-twitter"></i></a>
+			</div>
+		</div>
+	</footer>
+
+	<!--[if lt IE 9]>
+	<script src="bower_components/es5-shim/es5-shim.js"></script>
+	<script src="bower_components/json3/lib/json3.min.js"></script>
+	<![endif]-->
+
+	<!-- build:js modules/vendor.js -->
+	<!-- bower:js -->
+	<script src="bower_components/jquery/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/raven-js/dist/raven.js"></script>
+	<!-- endbower -->
+	<!-- endbuild -->
+
+	<script>
+		var sentryApiKey = 'http://8662f2972e1c4bef9eb95db55d27f80a@localhost:9000/2';
+		window.Raven.config(sentryApiKey).install();
+	</script>
+
+	<script src="//dl1d2m8ri9v3j.cloudfront.net/releases/1.2.5/tracker.js" data-customer="b9c28442cd8646f88894d297b239c626"></script>
+
+
+	<script src="modules/sentry-client.js"></script>
+	<script src="scripts/app.js"></script>
+
+</body>
+</html>
